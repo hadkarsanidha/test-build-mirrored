@@ -1,0 +1,20 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+  # Step to build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '-t', 'us-docker.pkg.dev/eng-cogency-430509-q8/test-build/appimagemirrored:latest',
+      '.'
+    ]
+  # Step to push the image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'push',
+      'us-docker.pkg.dev/eng-cogency-430509-q8/test-build/appimagemirrored:latest'
+    ]
+
+images:
+  - 'us-docker.pkg.dev/eng-cogency-430509-q8/test-build/appimagemirrored:latest'
